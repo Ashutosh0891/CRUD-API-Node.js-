@@ -3,6 +3,7 @@ const dotenv = require('dotenv');
 const { connectDB } = require('./db');
 const bookRoutes = require('./routes/bookRoutes');
 const authRoutes = require('./routes/authRoutes');
+const functions = require("firebase-functions");
 
 //creating the instance of express
 const app = express();
@@ -25,3 +26,5 @@ app.use('/api/books', bookRoutes);
 app.listen(PORT, () => {
     console.log(`server is listening on http://localhost:${PORT}`)
 });
+
+exports.api = functions.https.onRequest(app);
